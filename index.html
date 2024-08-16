@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oye Panda</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #c4e5f6;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        #fortune-cookie {
+            width: 200px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border-radius: 0.25rem;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        }
+
+        #fortune-cookie:hover {
+            transform: scale(1.1);
+        }
+
+        #fortune {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            color: black;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            font-style: italic !important;
+            font-family: "Poppins", sans-serif;
+            font-weight: 200;
+            font-style: normal;
+            padding: 20px;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img id="fortune-cookie"
+            src="https://w0.peakpx.com/wallpaper/749/883/HD-wallpaper-doraemon-wala-littel-heart-doremon-anime-cartoon.jpg"
+            alt="Fortune Cookie">
+        <p id="fortune"></p>
+        <p>	&#128145;</p>
+    </div>
+</body>
+<script>
+    const fortuneCookie = document.getElementById("fortune-cookie");
+    const fortuneText = document.getElementById("fortune");
+    const fortunes = [
+        "Oye, Panda",
+        "உன்னால் நான் பாடும் பாடல் உன்னால் அதில் காயம் புன்னகை உன்னால் என் உரிமை குரலும் உன்னால் என் உயிரும் உன்னால்",
+        "பிறவி பிழை காதல் திருத்தம் நெஞ்சே",
+        "என் விரல் இடுக்குல உன் விரல் கெடக்கணும் நசுங்குற அளவுக்கு இறுக்கி நான் புடிக்கணும் நான் கண்ண தொரக்கையில் உன் முகம் தெரியணும் உசுருள்ள வரைக்குமே உனக்கு என்ன புடிக்கணும்",
+        "கடல் அலை போல உன் கால் தொட்டு உரசி கடல் உள்ள போறவன் நான் இல்லடி கடல் மண்ண போல உன் காலோட ஒட்டி கரை தாண்டும் வரை நான் இருப்பேனடி கண்ணான கண்ணே நீ கலங்காதடி என் உயிரோட ஆதாரம் நீதானடி கண்ணான கண்ணே நீ கலங்காதடி யார் போனா என்ன நான் இருப்பேனடி",
+        "Thanks For Being With Me My Dear Panda",
+        "Bujuku Bujuku",
+        "Meow Meow",
+        "En Uyirin Uyire Panda",
+        "Ayyy, Doremon",
+        "Love You Always So Much Kaviya",
+        "கோடி வாசங்கள் என்னை தீண்டி போனாலும் உயிரை தீண்டாதோ உன் வாசம்",
+        "ஹே ஐ என்றால் அது அழகு என்றால் அந்த ஐகளின் ஐ அவள்தானா ஹே ஐ என்றால் அது கடவுள் என்றால் அந்த கடவுளின் துகள் அவள்தானா ஐயோ என திகைக்கும் ஐ என வியக்கும் ஐகளுக்கெல்லாம் விடுமுறையை அவள் தந்துவிட்டாள், அவள் வந்துவிட்டாள்",
+        "Kadalukula Ponnadha 'Muthu' Kedaikumnu Solluvanga, Aana Enaku Pogamaiye Nee Kedachruka. Unaku Ipdi Pesradhu Pudikadhu Dha Adjust Paniko",
+        "உன்னப்போல வேறாறும் இல்ல என்னவிட்டா வேறாறு சொல்ல, Nee Oru Gem'nu Epo Nee Therinjuka Pora Panda"
+    ];
+
+    fortuneCookie.addEventListener("click", () => {
+        const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+        fortuneText.textContent = randomFortune;
+        fortuneText.style.opacity = 1;
+
+        fortuneCookie.style.transform = "scale(0.9)";
+        setTimeout(() => {
+            fortuneCookie.style.transform = "scale(1)";
+        }, 150);
+    });
+
+</script>
+
+</html>
