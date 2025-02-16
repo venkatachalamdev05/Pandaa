@@ -5,25 +5,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oye Panda</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-        <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f7f7f7;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            background-color: #999999;
+            padding: 20px;
+            background-color: #ababad;
         }
 
         .container {
             text-align: center;
+            background-color: #ffffffb5;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         #fortune-cookie {
@@ -46,60 +51,166 @@
             opacity: 0;
             transition: opacity 0.5s ease;
             font-style: italic !important;
-            font-family: "Poppins", sans-serif;
             font-weight: 200;
-            font-style: normal;
             padding: 20px;
         }
-        
+
+        .form-label {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .form-container {
+            margin-bottom: 30px;
+        }
+
+        .btn-custom {
+            background-color: #ababad;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .btn-custom:hover {
+            background-color: #45a049;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .fortune-container {
+            margin-top: 30px;
+        }
+
+        /* Countdown Timer Style */
+        .countdown {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #333;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <img id="fortune-cookie"
-            src="IMG_6435.JPG"
-            alt="Fortune Cookie">
-        <p id="fortune"></p>
-        <p>	&#128145;</p>
+        <!-- Countdown Timer -->
+        <div class="countdown" id="countdown-timer">
+            *@#$%^
+        </div>
+
+        <!-- Form Section -->
+        <form id="user-form" class="form-container">
+            <div class="mb-3">
+                <label for="his-birthday" class="form-label">His Birthday:</label>
+                <input type="date" id="his-birthday" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="her-birthday" class="form-label">Her Birthday:</label>
+                <input type="date" id="her-birthday" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="codeword" class="form-label">Code Word:</label>
+                <input type="text" id="codeword" class="form-control" placeholder="Enter code word" required>
+            </div>
+            <button type="submit" class="btn btn-custom" disabled>Submit</button>
+        </form>
+
+        <!-- Fortune Cookie Section -->
+        <div id="fortune-cookie-section" class="fortune-container hidden">
+            <img id="fortune-cookie" src="IMG_6435.JPG" alt="Fortune Cookie">
+            <p id="fortune"></p>
+            <p>&#128145;</p>
+        </div>
     </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const fortuneCookie = document.getElementById("fortune-cookie");
+        const fortuneText = document.getElementById("fortune");
+        const fortunes = [
+            "Oye, Panda",
+            "Thanks For Being With Me My Dear Panda",
+            "Meow Meow",
+            "Love You Always So Much Kaviya",
+            "You Were My Light In Dark Days Oye",
+            "I Might Not Be The Best, But I Will Try To Be My Best Panda"
+        ];
+
+        const form = document.getElementById("user-form");
+        const hisBirthday = document.getElementById("his-birthday");
+        const herBirthday = document.getElementById("her-birthday");
+        const codeword = document.getElementById("codeword");
+        const fortuneCookieSection = document.getElementById("fortune-cookie-section");
+
+        // Countdown Timer to February 21, 2025
+        const countdownTimer = document.getElementById("countdown-timer");
+
+        function updateCountdown() {
+            const targetDate = new Date("February 21, 2025 00:00:00").getTime();
+            const currentDate = new Date().getTime();
+            const timeDifference = targetDate - currentDate;
+
+            if (timeDifference <= 0) {
+                countdownTimer.innerHTML = "The event has arrived!";
+                clearInterval(timerInterval);
+            } else {
+                const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+
+                countdownTimer.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }
+        }
+
+        // Update the countdown every second
+        const timerInterval = setInterval(updateCountdown, 1000);
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const hisBdayValue = new Date(hisBirthday.value);
+            const herBdayValue = new Date(herBirthday.value);
+            const code = codeword.value.trim().toLowerCase();
+
+            // Checking if the birthdays and code word match
+            const hisCorrectBday = new Date('1998-06-05').getTime();
+            const herCorrectBday = new Date('2005-10-05').getTime();
+            const correctCodeword = "panda";
+
+            if (hisBdayValue.getTime() === hisCorrectBday && herBdayValue.getTime() === herCorrectBday && code === correctCodeword) {
+                // Show the fortune cookie section if conditions are met
+                form.classList.add("hidden");
+                fortuneCookieSection.classList.remove("hidden");
+
+                // Show a random fortune
+                const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+                fortuneText.textContent = randomFortune;
+                fortuneText.style.opacity = 1;
+
+                fortuneCookie.style.transform = "scale(0.9)";
+                setTimeout(() => {
+                    fortuneCookie.style.transform = "scale(1)";
+                }, 150);
+            } else {
+                alert("Ila Idhu Enga Annan Velayudham Illa");
+            }
+        });
+
+        // On click, change the text below the fortune cookie image
+        fortuneCookie.addEventListener("click", () => {
+            const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+            fortuneText.textContent = randomFortune;
+            fortuneText.style.opacity = 1;
+        });
+    </script>
 </body>
-<script>
-    const fortuneCookie = document.getElementById("fortune-cookie");
-    const fortuneText = document.getElementById("fortune");
-    const fortunes = [
-        "Oye, Panda",
-        "உன்னால் நான் பாடும் பாடல் உன்னால் அதில் காயம் புன்னகை உன்னால் என் உரிமை குரலும் உன்னால் என் உயிரும் உன்னால்",
-        "பிறவி பிழை காதல் திருத்தம் நெஞ்சே",
-        "என் விரல் இடுக்குல உன் விரல் கெடக்கணும் நசுங்குற அளவுக்கு இறுக்கி நான் புடிக்கணும் நான் கண்ண தொரக்கையில் உன் முகம் தெரியணும் உசுருள்ள வரைக்குமே உனக்கு என்ன புடிக்கணும்",
-        "கடல் அலை போல உன் கால் தொட்டு உரசி கடல் உள்ள போறவன் நான் இல்லடி கடல் மண்ண போல உன் காலோட ஒட்டி கரை தாண்டும் வரை நான் இருப்பேனடி கண்ணான கண்ணே நீ கலங்காதடி என் உயிரோட ஆதாரம் நீதானடி கண்ணான கண்ணே நீ கலங்காதடி யார் போனா என்ன நான் இருப்பேனடி",
-        "Thanks For Being With Me My Dear Panda",
-        "Bujuku Bujuku",
-        "Meow Meow",
-        "En Uyirin Uyire Panda",
-        "Ayyy, Doremon",
-        "Love You Always So Much Kaviya",
-        "கோடி வாசங்கள் என்னை தீண்டி போனாலும் உயிரை தீண்டாதோ உன் வாசம்",
-        "ஹே ஐ என்றால் அது அழகு என்றால் அந்த ஐகளின் ஐ அவள்தானா ஹே ஐ என்றால் அது கடவுள் என்றால் அந்த கடவுளின் துகள் அவள்தானா ஐயோ என திகைக்கும் ஐ என வியக்கும் ஐகளுக்கெல்லாம் விடுமுறையை அவள் தந்துவிட்டாள், அவள் வந்துவிட்டாள்",
-        "Kadalukula Ponnadha 'Muthu' Kedaikumnu Solluvanga, Aana Enaku Pogamaiye Nee Kedachruka. Unaku Ipdi Pesradhu Pudikadhu Dha Adjust Paniko",
-        "உன்னப்போல வேறாறும் இல்ல என்னவிட்டா வேறாறு சொல்ல, Nee Oru Gem'nu Epo Nee Therinjuka Pora Panda",
-        "You Were My Light In Dark Days Oye",
-        "I Might Not Be The Best, But I Will Try To Be My Best Panda",
-        "Maturity'um Kuzhandha Thanamum Serndhu Unkita Paathen Panda",
-        "Epovumey Nee Enaku Magarani Dha Poonakutty"
-    ];
-
-    fortuneCookie.addEventListener("click", () => {
-        const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
-        fortuneText.textContent = randomFortune;
-        fortuneText.style.opacity = 1;
-
-        fortuneCookie.style.transform = "scale(0.9)";
-        setTimeout(() => {
-            fortuneCookie.style.transform = "scale(1)";
-        }, 150);
-    });
-
-</script>
 
 </html>
