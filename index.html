@@ -117,7 +117,7 @@
                 <label for="codeword" class="form-label">Code Word:</label>
                 <input type="text" id="codeword" class="form-control" placeholder="Enter code word" required>
             </div>
-            <button type="submit" class="btn btn-custom" disabled>Submit</button>
+            <button type="submit" class="btn btn-custom">Submit</button>
         </form>
 
         <!-- Fortune Cookie Section -->
@@ -200,7 +200,19 @@
                     fortuneCookie.style.transform = "scale(1)";
                 }, 150);
             } else {
-                alert("Ila Idhu Enga Annan Velayudham Illa");
+                // alert("Ila Idhu Enga Annan Velayudham Illa");
+                form.classList.add("hidden");
+                fortuneCookieSection.classList.remove("hidden");
+
+                // Show a random fortune
+                const randomFortune = fortunes[Math.floor(Math.random() * fortunes.length)];
+                fortuneText.textContent = randomFortune;
+                fortuneText.style.opacity = 1;
+
+                fortuneCookie.style.transform = "scale(0.9)";
+                setTimeout(() => {
+                    fortuneCookie.style.transform = "scale(1)";
+                }, 150);
             }
         });
 
